@@ -29,7 +29,6 @@ fun EcoTheme(
 ) {
     MaterialTheme(
         colorScheme = EcoColorScheme,
-        typography = Typography,
         content = content
     )
 }

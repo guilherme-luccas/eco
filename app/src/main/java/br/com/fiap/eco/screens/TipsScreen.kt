@@ -29,12 +29,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.eco.components.EcoBottomBar
 import br.com.fiap.eco.repository.RoomUserRepository
 import br.com.fiap.eco.repository.UserRepository
 import br.com.fiap.eco.repository.getAirQuality
@@ -132,7 +132,7 @@ fun TipsScreen(navController: NavController, email: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(MaterialTheme.colorScheme.background),
+                .background(MaterialTheme.colorScheme.surface),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -141,7 +141,7 @@ fun TipsScreen(navController: NavController, email: String) {
                     text = "Dicas Eco",
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = "Aprenda e inspire-se! 💡",
@@ -168,20 +168,20 @@ fun TipsScreen(navController: NavController, email: String) {
                         Icon(
                             imageVector = Icons.Default.Lightbulb,
                             contentDescription = "Dicas",
-                            tint = Color.White,
+                            tint = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.size(28.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Column {
                             Text(
                                 text = "Dicas Personalizadas",
-                                color = Color.White,
+                                color = MaterialTheme.colorScheme.onPrimary,
                                 fontWeight = FontWeight.Bold,
                                 style = MaterialTheme.typography.titleSmall
                             )
                             Text(
                                 text = "Baseadas no clima e ar da sua região",
-                                color = Color.White.copy(alpha = 0.8f),
+                                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
                                 style = MaterialTheme.typography.labelSmall
                             )
                         }

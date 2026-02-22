@@ -58,7 +58,7 @@ fun LoginScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         Column(
             modifier = Modifier
