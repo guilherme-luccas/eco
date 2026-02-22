@@ -38,12 +38,15 @@ fun EcoBottomBar(navController: NavController, email: String, selectedIndex: Int
                 onClick = {
                     when (index) {
                         0 -> navController.navigate(Destination.HomeScreen.createRoute(email)) {
+                            launchSingleTop = true
                             popUpTo(Destination.HomeScreen.route) { inclusive = true }
                         }
                         1 -> navController.navigate(Destination.TipsScreen.createRoute(email)) {
+                            launchSingleTop = true
                             popUpTo(Destination.HomeScreen.route)
                         }
                         2 -> navController.navigate(Destination.ProfileScreen.createRoute(email)) {
+                            launchSingleTop = true
                             popUpTo(Destination.HomeScreen.route)
                         }
                     }

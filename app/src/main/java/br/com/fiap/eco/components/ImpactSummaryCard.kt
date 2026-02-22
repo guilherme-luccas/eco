@@ -18,8 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import br.com.fiap.eco.ui.theme.EcoAccentBlue
-import br.com.fiap.eco.ui.theme.EcoAccentOrange
 
 @Composable
 fun ImpactSummaryCard(
@@ -52,14 +50,14 @@ fun ImpactSummaryCard(
                 icon = Icons.Default.WaterDrop,
                 label = "Água Poupada",
                 value = waterSaved,
-                color = EcoAccentBlue
+                color = MaterialTheme.colorScheme.secondary
             )
             Spacer(modifier = Modifier.height(8.dp))
             ImpactRow(
                 icon = Icons.Default.Delete,
                 label = "Plástico Evitado",
                 value = plasticAvoided,
-                color = EcoAccentOrange
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
     }

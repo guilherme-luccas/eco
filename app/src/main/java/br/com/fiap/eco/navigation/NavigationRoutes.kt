@@ -1,5 +1,7 @@
 package br.com.fiap.eco.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,7 +19,11 @@ fun NavigationRoutes() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Destination.LoginScreen.route
+        startDestination = Destination.LoginScreen.route,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None }
     ) {
         composable(Destination.LoginScreen.route) {
             LoginScreen(navController)

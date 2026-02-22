@@ -78,7 +78,7 @@ fun HabitItemCard(
             ) {
                 Text(
                     text = "+${habit.points}",
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                     style = MaterialTheme.typography.labelMedium
