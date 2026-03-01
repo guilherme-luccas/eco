@@ -243,7 +243,7 @@ fun TipsScreen(navController: NavController, email: String) {
                                 text = "🌐 Baseado em dados da API",
                                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.primary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
                     }

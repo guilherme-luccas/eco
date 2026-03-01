@@ -2,6 +2,7 @@ package br.com.fiap.eco.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Person
@@ -27,6 +28,7 @@ fun EcoBottomBar(navController: NavController, email: String, selectedIndex: Int
     val items = listOf(
         BottomNavItem(title = "Início", icon = Icons.Default.Home),
         BottomNavItem(title = "Dicas", icon = Icons.Default.Lightbulb),
+        BottomNavItem(title = "Estatísticas", icon = Icons.Default.BarChart),
         BottomNavItem(title = "Perfil", icon = Icons.Default.Person)
     )
     NavigationBar(
@@ -45,7 +47,11 @@ fun EcoBottomBar(navController: NavController, email: String, selectedIndex: Int
                             launchSingleTop = true
                             popUpTo(Destination.HomeScreen.route)
                         }
-                        2 -> navController.navigate(Destination.ProfileScreen.createRoute(email)) {
+                        2 -> navController.navigate(Destination.StatsScreen.createRoute(email)) {
+                            launchSingleTop = true
+                            popUpTo(Destination.HomeScreen.route)
+                        }
+                        3 -> navController.navigate(Destination.ProfileScreen.createRoute(email)) {
                             launchSingleTop = true
                             popUpTo(Destination.HomeScreen.route)
                         }

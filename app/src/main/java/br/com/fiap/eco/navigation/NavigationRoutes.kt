@@ -12,6 +12,7 @@ import br.com.fiap.eco.screens.HomeScreen
 import br.com.fiap.eco.screens.LoginScreen
 import br.com.fiap.eco.screens.ProfileScreen
 import br.com.fiap.eco.screens.SignupScreen
+import br.com.fiap.eco.screens.StatsScreen
 import br.com.fiap.eco.screens.TipsScreen
 
 @Composable
@@ -66,6 +67,19 @@ fun NavigationRoutes() {
             )
         ) { backStackEntry ->
             ProfileScreen(
+                navController,
+                backStackEntry.arguments?.getString("email") ?: ""
+            )
+        }
+        composable(
+            route = Destination.StatsScreen.route,
+            arguments = listOf(
+                navArgument(name = "email") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            StatsScreen(
                 navController,
                 backStackEntry.arguments?.getString("email") ?: ""
             )

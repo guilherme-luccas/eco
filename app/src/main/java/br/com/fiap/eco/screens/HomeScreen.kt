@@ -15,9 +15,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,6 +32,8 @@ import br.com.fiap.eco.components.EcoBottomBar
 import br.com.fiap.eco.components.HabitItemCard
 import br.com.fiap.eco.components.WeatherCard
 import br.com.fiap.eco.model.EcoHabit
+import br.com.fiap.eco.repository.ProgressRepository
+import br.com.fiap.eco.repository.RoomProgressRepository
 import br.com.fiap.eco.repository.RoomUserRepository
 import br.com.fiap.eco.repository.UserRepository
 import br.com.fiap.eco.repository.getAirQuality
@@ -36,8 +42,11 @@ import br.com.fiap.eco.repository.getCurrentWeather
 
 @Composable
 fun HomeScreen(navController: NavController, email: String) {
-    val userRepository: UserRepository = RoomUserRepository(LocalContext.current)
+    val context = LocalContext.current
+    val userRepository: UserRepository = RoomUserRepository(context)
+    val progressRepository: ProgressRepository = remember { RoomProgressRepository(context) }
     val user = userRepository.getUserByEmail(email)
+    val userId = user?.id ?: 0
     val city = user?.city ?: "São Paulo"
     val userName = user?.name ?: "Usuário"
 
@@ -59,8 +68,22 @@ fun HomeScreen(navController: NavController, email: String) {
     }
 
     val checkedHabits = remember { mutableStateListOf<Int>() }
+    LaunchedEffect(userId) {
+        if (userId == 0) return@LaunchedEffect
+        val today = progressRepository.getTodayProgress(userId)
+        checkedHabits.clear()
+        today?.completedHabitIndexes?.let { checkedHabits.addAll(it) }
+    }
     val completedCount = checkedHabits.size
     val totalPoints = checkedHabits.sumOf { habits[it].points }
+
+    fun saveProgress() {
+        if (userId == 0) return
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+        val indexes = checkedHabits.toList()
+        val points = indexes.sumOf { habits[it].points }
+        progressRepository.saveDayProgress(userId, date, indexes, points)
+    }
 
     Scaffold(
         bottomBar = {
@@ -116,6 +139,7 @@ fun HomeScreen(navController: NavController, email: String) {
                     onCheckedChange = { checked ->
                         if (checked) checkedHabits.add(index)
                         else checkedHabits.remove(index)
+                        saveProgress()
                     }
                 )
             }

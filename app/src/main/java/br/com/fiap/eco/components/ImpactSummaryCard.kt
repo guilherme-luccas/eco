@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ImpactSummaryCard(
+    title: String = "Resumo do Impacto",
     co2Avoided: String = "210 kg",
     waterSaved: String = "1.500 L",
     plasticAvoided: String = "85 itens"
@@ -34,7 +35,7 @@ fun ImpactSummaryCard(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Resumo do Impacto",
+                text = title,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleSmall
             )

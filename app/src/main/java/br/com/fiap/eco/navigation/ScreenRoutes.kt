@@ -12,4 +12,7 @@ sealed class Destination(val route: String) {
     object ProfileScreen : Destination("profile/{email}") {
         fun createRoute(email: String): String = "profile/$email"
     }
+    object StatsScreen : Destination("stats/{email}") {
+        fun createRoute(email: String): String = "stats/$email"
+    }
 }

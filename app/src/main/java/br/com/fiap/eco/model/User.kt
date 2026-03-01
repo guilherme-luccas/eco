@@ -13,5 +13,8 @@ data class User(
     val name: String = "",
     val email: String = "",
     val password: String = "",
-    val city: String = ""
+    val city: String = "",
+    val totalPoints: Int = 0,
+    val bestStreak: Int = 0,
+    val lastActivityDate: String? = null
 )
