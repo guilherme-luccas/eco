@@ -12,10 +12,50 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Preserve the line number information for debugging stack traces.
+-keepattributes SourceFile,LineNumberTable
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Hide the original source file name.
+-renamesourcefileattribute SourceFile
+
+# ── Keep generic signatures & annotations (needed by Gson, Room, Retrofit) ──
+-keepattributes Signature
+-keepattributes *Annotation*
+-keepattributes InnerClasses,EnclosingMethod
+
+# ── Enums (required for rememberSaveable / Bundle serialization) ──
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# ── Room: keep entities, DAOs, and Database ──
+-keep class * extends androidx.room.RoomDatabase { *; }
+-keep @androidx.room.Entity class * { *; }
+-keep @androidx.room.Dao interface * { *; }
+
+# ── Retrofit: keep service interfaces ──
+-keep,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# ── Gson: keep fields annotated with @SerializedName ──
+-keepclassmembers,allowobfuscation class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# ── Keep all model classes used by Gson / Retrofit deserialization ──
+-keep class br.com.fiap.eco.model.** { *; }
+
+# ── Keep all DAO interfaces ──
+-keep class br.com.fiap.eco.dao.** { *; }
+
+# ── Keep Retrofit service interfaces ──
+-keep class br.com.fiap.eco.services.** { *; }
+
+# ── Keep ThemePreference enum (used by rememberSaveable in MainActivity) ──
+-keep class br.com.fiap.eco.ui.theme.ThemePreference { *; }
+
+# ── Gson internals ──
+-dontwarn com.google.gson.internal.UnsafeAllocator
+-keep class com.google.gson.** { *; }
